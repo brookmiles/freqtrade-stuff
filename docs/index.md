@@ -1,8 +1,11 @@
 ---
-layout: page
-title: This is the page title
+title: Freqtrade Notes
 ---
 
-# How to make it go?
+# Freqtrade Notes
 
-Changing this file.
+I am not an expert. I do this as a hobby. Everything here is my opinion and not advice.
+
+# General Thoughts On Algotrading
+
+# Freqtrade Specific Notes
