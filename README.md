@@ -1,3 +1,3 @@
-# This Is A Page
+# Public Freqtrade Stuff
 
-I may put things here.
+Use the examples / information here at your own risk.
