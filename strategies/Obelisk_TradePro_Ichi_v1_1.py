@@ -25,7 +25,7 @@ from datetime import datetime, timedelta
 #
 # Does not attempt to emulate the risk/reward take-profit/stop-loss, so the sell criteria are mine.
 
-class Obelisk_TradeProIM_v1(IStrategy):
+class Obelisk_TradePro_Ichi_v1_1(IStrategy):
 
     # Optimal timeframe for the strategy
     timeframe = '1h'
@@ -97,17 +97,15 @@ class Obelisk_TradeProIM_v1(IStrategy):
         # cloud, green a > b, red a < b
         dataframe['senkou_a'] = ichimoku['senkou_span_a']
         dataframe['senkou_b'] = ichimoku['senkou_span_b']
-        # dataframe['leading_senkou_span_a'] = ichimoku['leading_senkou_span_a']
-        # dataframe['leading_senkou_span_b'] = ichimoku['leading_senkou_span_b']
+        dataframe['leading_senkou_span_a'] = ichimoku['leading_senkou_span_a']
+        dataframe['leading_senkou_span_b'] = ichimoku['leading_senkou_span_b']
         dataframe['cloud_green'] = ichimoku['cloud_green'] * 1
         dataframe['cloud_red'] = ichimoku['cloud_red'] * -1
 
         # DANGER ZONE START
 
-        # The cloud is normally shifted into the future visually, but it's based on present data.
-        # So in this case it should be ok to look at the "future" (which is actually the present)
-        # by shifting it back by displacement.
-        dataframe['future_green'] = ichimoku['cloud_green'].shift(-displacement).fillna(0).astype('int') * 2
+        # NOTE: Not actually the future, present data that is normally shifted forward for display as the cloud
+        dataframe['future_green'] = (dataframe['leading_senkou_span_a'] > dataframe['leading_senkou_span_b']).astype('int') * 2
 
         # The chikou_span is shifted into the past, so we need to be careful not to read the
         # current value.  But if we shift it forward again by displacement it should be safe to use.
