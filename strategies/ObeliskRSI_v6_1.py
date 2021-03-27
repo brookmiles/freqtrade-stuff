@@ -10,6 +10,7 @@ import pandas as pd  # noqa
 pd.options.mode.chained_assignment = None  # default='warn'
 
 from technical.util import resample_to_interval, resampled_merge
+from freqtrade.exchange import timeframe_to_minutes
 
 from functools import reduce
 from datetime import datetime, timedelta
@@ -111,16 +112,13 @@ class ObeliskRSI_v6_1(IStrategy):
     use_custom_stoploss = True
     custom_stop_ramp_minutes = 110
 
-    def get_ticker_indicator(self):
-        return int(self.timeframe[:-1])
-
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 
         # longer RSI used for determining trend
-        resample_rsi_indicator = self.get_ticker_indicator() * 12
-        resample_rsi_key = 'resample_{}_rsi'.format(resample_rsi_indicator)
+        resample_rsi_interval = timeframe_to_minutes(self.timeframe) * 12
+        resample_rsi_key = 'resample_{}_rsi'.format(resample_rsi_interval)
 
-        dataframe_long = resample_to_interval(dataframe, resample_rsi_indicator)
+        dataframe_long = resample_to_interval(dataframe, resample_rsi_interval)
         dataframe_long['rsi'] = ta.RSI(dataframe_long, timeperiod=14)
         dataframe = resampled_merge(dataframe, dataframe_long)
         dataframe[resample_rsi_key].fillna(method='ffill', inplace=True)
