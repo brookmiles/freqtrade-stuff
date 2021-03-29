@@ -39,7 +39,7 @@ This is an overlay of each implementation using `signalperiod=2`, the results qu
 
 ![20210329-172506-msedge](https://user-images.githubusercontent.com/323682/112810586-22f71d80-90b6-11eb-8aa1-0602cbd40731.png)
 
-This is an overlay of each implementation using `signalperiod=1`, the ta-lib version is looking into the future by two candles.
+This is an overlay of each implementation using `signalperiod=1`, the ta-lib version is looking into the future by two candles.  You can see that the ta-lib signal line is two candles "early", predicting the future price movement.
 
 ![20210329-172602-msedge](https://user-images.githubusercontent.com/323682/112810643-31ddd000-90b6-11eb-889b-333de04f596a.png)
 
