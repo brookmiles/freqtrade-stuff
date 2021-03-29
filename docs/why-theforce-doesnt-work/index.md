@@ -1,4 +1,8 @@
-# Why TheForce Strategy Doesn't Work
+---
+title: Why TheForce Strategy Doesn't Work
+permalink: /why-theforce-doesnt-work/
+layout: post
+---
 
 TheForce gets amazing backtest results, but doesn't work live.
 
@@ -6,7 +10,7 @@ The crazy backtest profits are only seen when using `signalperiod=1` with `ta.MA
 
 If we switch the MACD implementation from ta-lib, to qtpylib, most of the profits go away:
 
-```
+``` python
         # MACD (Magic Profits)
         macd = ta.MACD(dataframe,12,26,1)
         dataframe['macd'] = macd['macd']
@@ -14,7 +18,7 @@ If we switch the MACD implementation from ta-lib, to qtpylib, most of the profit
         dataframe['macdhist'] = macd['macdhist']
 ```
 
-```
+``` python
         # MACD (No Magic Profts)
         macd = qtpylib.macd(dataframe['close'],12,26,1)
         dataframe['macd'] = macd['macd']
