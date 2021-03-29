@@ -35,8 +35,16 @@ If we switch the MACD implementation from ta-lib, to qtpylib, most of the profit
 
 What seems to be happening is that ta-lib is, for some reason, cheating by looking into the future by 2 candles when `signalperiod=1`.
 
+This is an overlay of each implementation using `signalperiod=2`, the results quickly converg and overlap each other.
+
 ![20210329-172506-msedge](https://user-images.githubusercontent.com/323682/112810586-22f71d80-90b6-11eb-8aa1-0602cbd40731.png)
+
+This is an overlay of each implementation using `signalperiod=1`, the ta-lib version is looking into the future by two candles.
 
 ![20210329-172602-msedge](https://user-images.githubusercontent.com/323682/112810643-31ddd000-90b6-11eb-889b-333de04f596a.png)
 
+Two double check, here is each implementation using `signalperiod=1`, but the ta-lib version has been shifted forward by two candles using `.shift(2)`.  The macd line is now two candles "late", and the signal line once again lines up with the qtpylib implementation.
+
 ![20210329-172608-msedge](https://user-images.githubusercontent.com/323682/112810651-34d8c080-90b6-11eb-8b5e-6814345269dd.png)
+
+Sadly TheForce is looking into the future to predict the direction of price movement, which can't happen during live or dry-run, unless you are an _actual Jedi_.
