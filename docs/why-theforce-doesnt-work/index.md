@@ -35,7 +35,7 @@ If we switch the MACD implementation from ta-lib, to qtpylib, most of the profit
 
 What seems to be happening is that ta-lib is, for some reason, cheating by looking into the future by 2 candles when `signalperiod=1`.
 
-This is an overlay of each implementation using `signalperiod=2`, the results quickly converg and overlap each other.
+This is an overlay of each implementation using `signalperiod=2`, the results quickly converge and overlap each other.
 
 ![20210329-172506-msedge](https://user-images.githubusercontent.com/323682/112810586-22f71d80-90b6-11eb-8aa1-0602cbd40731.png)
 
