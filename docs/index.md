@@ -1,5 +1,5 @@
 ---
-title: Freqtrade Notes
+layout: home
 ---
 
 
