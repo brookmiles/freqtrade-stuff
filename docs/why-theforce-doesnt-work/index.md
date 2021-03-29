@@ -1,4 +1,4 @@
-# TheForce strategy doesn't work
+# Why TheForce Strategy Doesn't Work
 
 TheForce gets amazing backtest results, but doesn't work live.
 
@@ -31,7 +31,7 @@ If we switch the MACD implementation from ta-lib, to qtpylib, most of the profit
 =================================================================================================================================================
 ```
 
-# Why?
+## Why?
 
 What seems to be happening is that ta-lib is, for some reason, cheating by looking into the future by 2 candles when `signalperiod=1`.
 
