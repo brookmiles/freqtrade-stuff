@@ -2,7 +2,7 @@
 
 TheForce gets amazing backtest results, but doesn't work live.
 
-The crazy backtest profits are only seen when using a value of 1 for `signalperiod` with `ta.MACD(dataframe,12,26,1)`
+The crazy backtest profits are only seen when using `signalperiod=1` with `ta.MACD(dataframe,12,26,1)`
 
 If we switch the MACD implementation from ta-lib, to qtpylib, most of the profits go away:
 
@@ -43,7 +43,7 @@ This is an overlay of each implementation using `signalperiod=1`, the ta-lib ver
 
 ![20210329-172602-msedge](https://user-images.githubusercontent.com/323682/112810643-31ddd000-90b6-11eb-889b-333de04f596a.png)
 
-Two double check, here is each implementation using `signalperiod=1`, but the ta-lib version has been shifted forward by two candles using `.shift(2)`.  The macd line is now two candles "late", and the signal line once again lines up with the qtpylib implementation.
+Just double checking, here is each implementation using `signalperiod=1`, but the ta-lib version has been shifted forward by two candles using `.shift(2)`.  The macd line is now two candles "late", and the signal line once again lines up with the qtpylib implementation.
 
 ![20210329-172608-msedge](https://user-images.githubusercontent.com/323682/112810651-34d8c080-90b6-11eb-8b5e-6814345269dd.png)
 
