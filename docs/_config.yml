@@ -2,14 +2,15 @@ title: Freqtrade Stuff
 author:
   name: Brook Miles
 description: > # this means to ignore newlines until "show_excerpts:"
-  Notes / thoughts / examples for Freqtrade
+  Notes / thoughts / examples for Freqtrade.
+  I am not an expert. I do this as a hobby. Everything here is my opinion/experience and not advice.
 
 show_excerpts: false # set to true to show excerpts on the homepage
 
 # Minima date format
 # refer to https://shopify.github.io/liquid/filters/date/ if you want to customize this
 minima:
-  date_format: "%b %-d, %Y"
+  date_format: "%Y-%m-%d"
 
   # generate social links in footer
   social_links:
