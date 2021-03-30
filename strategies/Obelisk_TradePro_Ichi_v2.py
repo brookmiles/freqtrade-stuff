@@ -66,7 +66,7 @@ class Obelisk_TradePro_Ichi_v2(IStrategy):
     # Optimal timeframe for the strategy
     timeframe = '1h'
 
-    startup_candle_count = 120
+    startup_candle_count = 180
     process_only_new_candles = True
 
     minimal_roi = {
