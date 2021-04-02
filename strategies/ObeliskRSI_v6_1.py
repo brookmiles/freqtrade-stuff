@@ -174,10 +174,9 @@ class ObeliskRSI_v6_1(IStrategy):
 
     def custom_stoploss(self, pair: str, trade: 'Trade', current_time: datetime, current_rate: float, current_profit: float, **kwargs) -> float:
 
-        # UTC conversions seem to be necessary depending on your environment
-        since_open = current_time.tz_convert("UTC") - trade.open_date.tz_convert("UTC")
+        since_open = int((current_time.timestamp() - trade.open_date_utc.timestamp()) // 60)
 
-        sl_pct = 1 - easeInCubic( clamp01( since_open / timedelta(minutes=self.custom_stop_ramp_minutes) ) )
+        sl_pct = 1 - easeInCubic( clamp01( since_open / self.custom_stop_ramp_minutes ) )
         sl_ramp = abs(self.stoploss) * sl_pct
 
         return sl_ramp + 0.001 # we can't go all the way to zero
