@@ -1,5 +1,5 @@
 # --- Do not remove these libs ---
-from freqtrade.strategy.interface import IStrategy
+from freqtrade.strategy import IStrategy, merge_informative_pair
 from pandas import DataFrame
 import talib.abstract as ta
 import freqtrade.vendor.qtpylib.indicators as qtpylib
@@ -8,16 +8,23 @@ import freqtrade.vendor.qtpylib.indicators as qtpylib
 import pandas as pd
 import numpy as np
 import technical.indicators as ftt
+from freqtrade.exchange import timeframe_to_minutes
 
-pd.options.mode.chained_assignment = None  # default='warn'
-
-# Obelisk_TradePro_Ichi v2.1 - 2021-04-02
+# Obelisk_TradePro_Ichi v2.2 - 2021-04-04
 #
 # by Obelisk 
 # https://twitter.com/brookmiles
 #
-# Originally based on "Crazy Results Best Ichimoku Cloud Trading Strategy Proven 100 Trades" by Trade Pro
-# https://www.youtube.com/watch?v=8gWIykJgMNY
+# WARNING
+#
+# While this strategy is designed to be run at 1h, it should be backtested at 5m (or 1m).
+# This is done to avoid misleading results produced using trailing stops and roi values at longer timeframes.
+#
+# When running at 5m, an informative pair at 1h will be used to generate signals equivalent to running at 1h.
+#
+# live / dryrun: use 1h
+# backtest / hyperopt: use 5m or 1m
+#
 #
 # Contributions:
 #
@@ -49,7 +56,6 @@ pd.options.mode.chained_assignment = None  # default='warn'
 #     },
 # ],
 
-
 def SSLChannels(dataframe, length = 7):
     df = dataframe.copy()
     df['ATR'] = ta.ATR(df, timeperiod=14)
@@ -61,33 +67,39 @@ def SSLChannels(dataframe, length = 7):
     df['sslUp'] = np.where(df['hlv'] < 0, df['smaLow'], df['smaHigh'])
     return df['sslDown'], df['sslUp']
 
-class Obelisk_TradePro_Ichi_v2_1(IStrategy):
+class Obelisk_TradePro_Ichi_v2_2(IStrategy):
 
     # Optimal timeframe for the strategy
-    timeframe = '1h'
+    # Backtest or hyperopt at this timeframe
+    timeframe = '5m'
 
-    # WARNING: ichimoku is a long indicator, if you remove or use a 
+    # Generate signals from the 1h timeframe
+    # Live or Dry-run at this timeframe
+    informative_timeframe = '1h'
+
+    # WARNING
+    # ichimoku is a long indicator, if you remove or use a 
     # shorter startup_candle_count your results will be unstable/invalid 
     # for up to a week from the start of your backtest or dry/live run
     # (180 candles = 7.5 days)
     startup_candle_count = 180
 
-    # NOTE: this strat only uses candle information, so processing between
+    # This strat only uses candle information, so processing between
     # new candles is a waste of resources as nothing will change
     process_only_new_candles = True
 
+    # ROI table:
     minimal_roi = {
-        "0": 10,
+        "0": 0.16,
+        "40": 0.1,
+        "90": 0.035,
+        "210": 0
     }
 
+    # I haven't been able to determine a good default stoploss.
+    # Select or hyperopt an stoploss that you're happy with, and backtest the result.
     # Stoploss:
-    stoploss = -0.075
-
-    # Trailing stop:
-    trailing_stop = True
-    trailing_stop_positive = 0.005
-    trailing_stop_positive_offset = 0.03
-    trailing_only_offset_is_reached = True
+    stoploss = -0.99
 
     plot_config = {
         # Main plot indicators (Moving averages, ...)
@@ -113,14 +125,17 @@ class Obelisk_TradePro_Ichi_v2_1(IStrategy):
         'subplots': {
             "Signals": {
                 'go_long': {'color': 'blue'},
-                'future_green': {'color': 'green'},
-                'chikou_high': {'color': 'lightgreen'},
-                'ssl_high': {'color': 'orange'},
+                'buy_criteria': {'color': 'green'},
+                'sell_criteria': {'color': 'red'},
             },
         }
     }
 
-    def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+    def informative_pairs(self):
+        pairs = self.dp.current_whitelist()
+        informative_pairs = [(pair, self.informative_timeframe) for pair in pairs]
+
+    def do_indicators(self, dataframe: DataFrame, metadata: dict):
 
         # # Standard Settings
         # displacement = 26
@@ -187,6 +202,28 @@ class Obelisk_TradePro_Ichi_v2_1(IStrategy):
                 (dataframe['rocr'] > dataframe['rocr'].shift()) &
                 (dataframe['rmi-fast'] > dataframe['rmi-fast'].shift(2))
                 ).astype('int') * 4
+
+        return dataframe
+
+    def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+
+        if self.config['runmode'].value in ('backtest', 'hyperopt'):
+            assert (timeframe_to_minutes(self.timeframe) <= 5), "Backtest this strategy in 5m or 1m timeframe. Read comments for details."
+
+        if self.timeframe == self.informative_timeframe:
+            dataframe = self.do_indicators(dataframe, metadata)
+        else:
+            if not self.dp:
+                return dataframe
+
+            informative = self.dp.get_pair_dataframe(pair=metadata['pair'], timeframe=self.informative_timeframe)
+
+            informative = self.do_indicators(informative.copy(), metadata)
+
+            dataframe = merge_informative_pair(dataframe, informative, self.timeframe, self.informative_timeframe, ffill=True)
+            # don't overwrite the base dataframe's HLCV information
+            skip_columns = [(s + "_" + self.informative_timeframe) for s in ['date', 'open', 'high', 'low', 'close', 'volume']]
+            dataframe.rename(columns=lambda s: s.replace("_{}".format(self.informative_timeframe), "") if (not s in skip_columns) else s, inplace=True)
 
         return dataframe
 
