@@ -25,6 +25,7 @@ from freqtrade.exchange import timeframe_to_minutes
 # live / dryrun: use 1h
 # backtest / hyperopt: use 5m or 1m
 #
+# WARNING see note on stoploss_on_exchange below
 #
 # Contributions:
 #
@@ -103,8 +104,11 @@ class Obelisk_TradePro_Ichi_v2_2(IStrategy):
     # I haven't been able to determine a good default stoploss.
     # Select or hyperopt an stoploss that you're happy with, and backtest the result.
     #
+    # Do not use stoploss_on_exchange if you leave the stoploss at the default value 
+    # or the bot may trigger emergencysell when it fails to place the stoploss.
+    #
     # Stoploss:
-    stoploss = -0.9
+    stoploss = -0.99
 
     plot_config = {
         # Main plot indicators (Moving averages, ...)
