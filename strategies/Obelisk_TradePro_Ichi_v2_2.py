@@ -69,7 +69,11 @@ def SSLChannels(dataframe, length = 7):
 
 class Obelisk_TradePro_Ichi_v2_2(IStrategy):
 
-    # Optimal timeframe for the strategy
+    # Do not change the timeframe values in this file
+    # Use the config file or command line options to select the appropriate timeframe:
+    #     5m - BACKTEST or HYPEROPT
+    #     1h - LIVE or DRYRUN
+
     # Backtest or hyperopt at this timeframe
     timeframe = '5m'
 
@@ -98,8 +102,9 @@ class Obelisk_TradePro_Ichi_v2_2(IStrategy):
 
     # I haven't been able to determine a good default stoploss.
     # Select or hyperopt an stoploss that you're happy with, and backtest the result.
+    #
     # Stoploss:
-    stoploss = -0.99
+    stoploss = -0.9
 
     plot_config = {
         # Main plot indicators (Moving averages, ...)
