@@ -87,6 +87,10 @@ class Obelisk_Ichimoku_Slow_v1_1(IStrategy):
         "0": 10,
     }
 
+    # WARNING setting a stoploss for this strategy doesn't make much sense, as it will buy
+    # back into the trend at the next available opportunity, unless the trend has ended,
+    # in which case it would sell anyway.
+
     # Stoploss:
     stoploss = -0.99
 
@@ -119,6 +123,11 @@ class Obelisk_Ichimoku_Slow_v1_1(IStrategy):
             },
         }
     }
+
+    def informative_pairs(self):
+        pairs = self.dp.current_whitelist()
+        informative_pairs = [(pair, self.informative_timeframe) for pair in pairs]
+        return informative_pairs
 
     def do_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
 

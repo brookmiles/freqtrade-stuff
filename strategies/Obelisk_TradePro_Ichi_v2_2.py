@@ -134,6 +134,7 @@ class Obelisk_TradePro_Ichi_v2_2(IStrategy):
     def informative_pairs(self):
         pairs = self.dp.current_whitelist()
         informative_pairs = [(pair, self.informative_timeframe) for pair in pairs]
+        return informative_pairs
 
     def do_indicators(self, dataframe: DataFrame, metadata: dict):
 
