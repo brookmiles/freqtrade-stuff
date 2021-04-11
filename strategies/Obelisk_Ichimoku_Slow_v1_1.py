@@ -20,6 +20,11 @@ from freqtrade.exchange import timeframe_to_minutes
 #
 # This strategy can optionally be backtested at 5m or 1m to validate roi/trailing stop behaviour (there isn't any).
 #
+# WARNING 
+#
+# Do not use stoploss_on_exchange or the bot may trigger emergencysell when it 
+# fails to place the stoploss.
+#
 # WARNING
 #
 # This strat will buy into ongoing trends, so pay attention to timing when you launch it. 

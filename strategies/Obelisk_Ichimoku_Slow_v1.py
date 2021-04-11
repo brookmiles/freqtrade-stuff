@@ -11,7 +11,7 @@ import technical.indicators as ftt
 
 pd.options.mode.chained_assignment = None  # default='warn'
 
-# Obelisk_Ichimoku_Slow_v1 - 2021-04-02
+# Obelisk_Ichimoku_Slow v1 - 2021-04-02
 #
 # by Obelisk 
 # https://twitter.com/brookmiles
@@ -21,6 +21,12 @@ pd.options.mode.chained_assignment = None  # default='warn'
 #
 # This strat will buy into ongoing trends, so pay attention to timing when you launch it. 
 # If the market is peaking then you may end up buying into trends that are just about to end.
+#
+# WARNING 
+#
+# Do not use stoploss_on_exchange or the bot may trigger emergencysell when it 
+# fails to place the stoploss.
+#
 #
 # Contributions:
 # JimmyNixx - SSL Channel confirmation
