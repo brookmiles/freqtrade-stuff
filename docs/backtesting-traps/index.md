@@ -50,7 +50,6 @@ Here's an example strategy that exploits this feature.  It uses no signals, and 
 from freqtrade.strategy.interface import IStrategy
 from typing import Dict, List
 from pandas import DataFrame
-import freqtrade.vendor.qtpylib.indicators as qtpylib
 
 class Magic_Trailing_Stoploss(IStrategy):
 
@@ -82,7 +81,7 @@ In only 11 days, we've gone from $2,500 to $65,150, a 2506% profit! Amazing!
 
 Sadly, this strategy will not produce similar results when run live.
 
-First of all, take a look at the Avg. Duration Winners / Losers.  1 minute, and 7 minutes respectively.  When trading hour long candles, this is a dead givaway that you're exploiting the behaviour of backtesting.
+First of all, take a look at the Avg. Duration Winners / Losers.  1 minute, and 7 minutes respectively.  When trading hour long candles, this is a sign that you're exploiting the behaviour of backtesting.
 
 Using [`plot-dataframe`](https://www.freqtrade.io/en/latest/plotting/) can further help illustrate what's happening:
 
