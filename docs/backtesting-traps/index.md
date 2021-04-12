@@ -105,7 +105,7 @@ If you have a reasonably tight ROI set, you may see the ROI hit instead of the c
 
 ### What To Watch Out For
 
-Things to watch out for while you're developing your strategy that might clue you in to the fact that you're accidentally exploiting this behaviour:
+Things to watch out for while you're developing/backtesting your strategy that might be a clue that you're accidentally exploiting this behaviour:
 
 - Average duration of trades is lower than your candle timeframe, maybe only a few minutes when using 1h candles.
 - When plotted, trades regularly close on the same candle that they are opened.
