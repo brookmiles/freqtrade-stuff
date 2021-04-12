@@ -58,9 +58,12 @@ Using [`plot-dataframe`](https://www.freqtrade.io/en/latest/plotting/) can help 
 
 Most of the candles show that the trade opened and close in the same candle, which backtesting will consider to be 0 minutes, or on the very next candle, 60 minutes later.
 
-When backtesting at any timeframe, Freqtrade only had candle data to work with, it doesn't know how the price moved during the candle.  With 1m or 5m candles, it's less of a problem (although it still exists), but with longer timeframes, like 1h, 4h, etc... Freqtrade needs to make some major assumptions about the order of events.
+When backtesting at any timeframe, Freqtrade has only candle data to work with. It doesn't know how the price moved *during the candle*.  With 1m or 5m candles, it's less of a problem (although it still exists), but with longer timeframes, like 1h, 4h, etc... Freqtrade needs to make some major assumptions about the order of events.
 
 As mentioned in the [official documentation on Backtesting](https://www.freqtrade.io/en/stable/backtesting/#assumptions-made-by-backtesting), when Freqtrade calculates trailing stoploss, it first moves the price to the high, moves the trailing stop up to match accordingly, and then moves the price down, possibly triggering the new trailing stop price.
 
-The longer the timeframe you use, the less realistic this is.  With a small trailing stoploss, it's exceptionally unlikely that the price would move directly from open to high without decreasing enough to trigger the stoploss.  If your stoploss is smaller than the spread on the pair you're trading, the stoploss will likely be hit on the next sell trade.
+Backtesting with extremely tight trailing stops essentially gives you a perfect candle trade, selling just below the high of the candle, almost every time.
 
+The longer the timeframe you use, the less realistic this is.  With a small trailing stoploss, it's exceptionally unlikely that the price would move directly from open to high without decreasing enough to trigger the stoploss.  If your stoploss is smaller than the spread on the pair you're trading, the stoploss will likely be hit on the next sell trade. The longer the timeframe, the more likely your trailing stop, or even your default stoploss, will be triggered before reaching the high and then falling.
+
+And this is still before accounting for regular slippage on the (probably market) stoploss order, which will further decrease your gains.
