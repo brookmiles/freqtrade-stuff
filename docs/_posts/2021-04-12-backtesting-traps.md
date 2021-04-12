@@ -46,7 +46,7 @@ One backtesting anomaly that seems to produce incredible, one might even say *un
 
 Here's an example of a strategy that exploits backtesting to report incredible results:
 
-IMG HERE
+![20210412-173449-powershell](https://user-images.githubusercontent.com/323682/114368495-6b373500-9bb8-11eb-8cc5-0e8103c31d9a.png)
 
 In only 11 days, we've gone from $2,500 to $65,150, a 2506% profit! Amazing!
 
