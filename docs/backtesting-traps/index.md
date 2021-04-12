@@ -26,7 +26,8 @@ To start with, make sure to familiarize yourself with the [official documentatio
 
 Refer to [Prices Used For Orders](https://www.freqtrade.io/en/stable/configuration/#prices-used-for-orders) and [Market Order Pricing](https://www.freqtrade.io/en/stable/configuration/#market-order-pricing) in the Configuration documentation for details.
 
-
+Things to watch out for:
+- Large number of trades and a low average profit.  If your strategy is profitable in backtesting based on many trades with very small profits, it's very likely those profits will become losses in live due to slippage, especially on low volume pairs.  Be cautious if your average profit is below 0.5%, and wary of any changes that increase your total profit but decrease your average profit.
 
 ## Reading Future Candles
 
