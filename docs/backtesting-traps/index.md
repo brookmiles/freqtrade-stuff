@@ -111,3 +111,13 @@ Things to watch out for while you're developing/backtesting your strategy that m
 - When plotted, trades regularly close on the same candle that they are opened.
 - Your trailing stop is lower than, or not much bigger than the spread on the pairs you're trading.  Typical spreads range from 0.1% to 0.5% on high volume coins, and are often much higher on low volume coins.
 - Profits keep increasing as you decrease the size of your trailing stop.
+
+## Trailing Stop Workaround
+
+One solution you can use to ensure that you are seeing more realistic backtest results is to backtest your 1h strategy at 5m or 1m, using an informative pair at 1h to generate trade signals.  The signals will operate on the same 1h timeframe that live does, and running the strategy using 5m or 1m candle data will simulate price movement during that 1h, providing more realistic trailing stoploss and ROI behaviour.
+
+Unfortunately this will be slower than backtesting at 1h, and it complicates the code somewhat.  But if you plan on using a trailing stoploss or ROI, you probably want to know that your backtest results are not complete lies.
+
+Here is a simple strategy that uses a simple EMA crossover to generate buy signals: [EMA_Trailing_Stoploss](EMA_Trailing_Stoploss.py)
+
+And the same strategy after converting it to be backtested at 5m or 1m: [EMA_Trailing_Stoploss_LessMagic](EMA_Trailing_Stoploss_LessMagic.py)
