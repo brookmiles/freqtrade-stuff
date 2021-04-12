@@ -1,6 +1,7 @@
 ---
 title: Backtesting Traps
-layout: page
+date: 2021-04-12T20:00:00+09:00
+layout: post
 ---
 
 Backtesting is important to understand the performance and behaviour of your strategy, but there are a number of issues which can result in a backtest producing much better results than are likely once the strategy is run live (or dry-run).
