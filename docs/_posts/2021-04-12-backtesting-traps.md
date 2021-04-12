@@ -38,7 +38,7 @@ When creating the signals for any given candle it is therefor easy to accidental
 
 Read the official documentation on [common mistakes made when developing strategies](https://www.freqtrade.io/en/stable/strategy-customization/#common-mistakes-when-developing-strategies) for details on things to avoid.
 
-[Why TheForce Doesn't Work]({% post_url 2021-03-29-why-theforce-doesnt-work %}) is a case study in a strategy seeming to produce amazing profits in backtesting due to accidentally reading from the future.
+[Why TheForce Doesn't Work]({% post_url freqtrade-stuff/2021-03-29-why-theforce-doesnt-work %}) is a case study in a strategy seeming to produce amazing profits in backtesting due to accidentally reading from the future.
 
 ## Trailing Stops
 
