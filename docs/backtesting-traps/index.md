@@ -159,6 +159,10 @@ class EMA_Trailing_Stoploss(IStrategy):
         return dataframe
 ```
 
+Backtesting shows a very respectable 11% profit, but this is an illusion:
+
+![20210412-215010](https://user-images.githubusercontent.com/323682/114396964-25d72f80-9bd9-11eb-82ae-5397efc87e05.png)
+
 And the same strategy after converting it to be backtested at 5m or 1m: [EMA_Trailing_Stoploss_LessMagic](EMA_Trailing_Stoploss_LessMagic.py)
 
 - change `timeframe` to 5m and add `informative_timeframe`
@@ -229,3 +233,7 @@ class EMA_Trailing_Stoploss_LessMagic(IStrategy):
     def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         return dataframe
 ```
+
+Backtesting now shows all of the profits have vanished, this is much closer to what would happen live, and will be even lower once spread, slippage, unfilled orders, etc... are accounted for.
+
+![20210412-215036](https://user-images.githubusercontent.com/323682/114397037-37b8d280-9bd9-11eb-9dfa-c6170cd4b8bc.png)
