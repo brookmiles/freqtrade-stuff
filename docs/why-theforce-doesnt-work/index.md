@@ -1,7 +1,6 @@
 ---
 title: Why TheForce Strategy Doesn't Work
-permalink: /why-theforce-doesnt-work/
-layout: post
+layout: page
 ---
 
 TheForce gets amazing backtest results, but doesn't work live.
