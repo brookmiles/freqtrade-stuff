@@ -1,6 +1,7 @@
 ---
 title: Why TheForce Strategy Doesn't Work
-layout: page
+date: 2021-03-29T20:00:00+09:00
+layout: post
 ---
 
 TheForce gets amazing backtest results, but doesn't work live.
