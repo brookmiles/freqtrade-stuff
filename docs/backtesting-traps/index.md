@@ -44,7 +44,7 @@ Read the official documentation on [common mistakes made when developing strateg
 
 One backtesting anomaly that seems to produce incredible, one might even say *unbelieveable*, results is the use of very small trailing stops.
 
-Here's an example strategy that exploits this feature.  It uses no signals, and simply buys on every candle on a 1h timeframe.  Sells happen by reaching minimum ROI or hitting the trailing stoploss.
+Here's an example strategy that exploits this feature.  It uses no signals, and simply buys on every candle on a 1h timeframe.  Sells happen by reaching minimum ROI of 1%, or by hitting the trailing stoploss of 0.1%.
 
 ``` python
 from freqtrade.strategy.interface import IStrategy
