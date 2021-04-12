@@ -40,9 +40,15 @@ Read the official documentation on [common mistakes made when developing strateg
 
 ## Trailing Stops
 
-*"i keep tightening trailing stoploss and backtest profits go up. that cant be right."*
+> *"i keep tightening trailing stoploss and backtest profits go up. that cant be right."*
 
-```python
-trailing_stop_positive = 0.0007
-trailing_stop_positive_offset = 0.001
-```
+One backtesting anomaly that seems to produce incredible, one might even say *unbelieveable*, results is the use of very small trailing stops.
+
+Here's an example of a strategy that exploits backtesting to report incredible results:
+
+IMG HERE
+
+In only 11 days, we've gone from $2,500 to $65,150, a 2506% profit! Amazing!
+
+Sadly, this strategy will not produce similar results when run live.
+
