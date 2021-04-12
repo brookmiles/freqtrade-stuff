@@ -120,4 +120,112 @@ Unfortunately this will be slower than backtesting at 1h, and it complicates the
 
 Here is a simple strategy that uses a simple EMA crossover to generate buy signals: [EMA_Trailing_Stoploss](EMA_Trailing_Stoploss.py)
 
+
+``` python
+from freqtrade.strategy import IStrategy
+from typing import Dict, List
+from pandas import DataFrame
+import talib.abstract as ta
+import freqtrade.vendor.qtpylib.indicators as qtpylib
+
+class EMA_Trailing_Stoploss(IStrategy):
+
+    minimal_roi = { "0": 0.01 }
+
+    stoploss = -0.01
+    
+    trailing_stop = True
+    trailing_stop_positive = 0.001
+
+    timeframe = '1h'
+
+    def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+
+        dataframe['ema3'] = ta.EMA(dataframe, timeperiod=3)
+        dataframe['ema5'] = ta.EMA(dataframe, timeperiod=5)
+        dataframe['go_long'] = qtpylib.crossed_above(dataframe['ema3'], dataframe['ema5']).astype('int')
+
+        return dataframe
+
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+        dataframe.loc[
+            qtpylib.crossed_above(dataframe['go_long'], 0)
+        ,
+        'buy'] = 1
+
+        return dataframe
+
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+        return dataframe
+```
+
 And the same strategy after converting it to be backtested at 5m or 1m: [EMA_Trailing_Stoploss_LessMagic](EMA_Trailing_Stoploss_LessMagic.py)
+
+- change `timeframe` to 5m and add `informative_timeframe`
+- move indicators from `populate_indicators` to a new function called `do_indicators`
+- `populate_indicators` checks timeframe and run mode, and runs `do_indicators` directly when live, or runs it using the 1h informative pairs and then merges the results back into the main dataframe when backtesting.
+- put all of your signal creation in `do_indicators`, and only read buy/sell signals from `populate_buy_trend` / `populate_sell_trend`
+
+``` python
+from freqtrade.strategy import IStrategy, merge_informative_pair
+from typing import Dict, List
+from pandas import DataFrame
+import talib.abstract as ta
+import freqtrade.vendor.qtpylib.indicators as qtpylib
+from freqtrade.exchange import timeframe_to_minutes
+
+class EMA_Trailing_Stoploss_LessMagic(IStrategy):
+
+    minimal_roi = { "0": 0.01 }
+
+    stoploss = -0.01
+    
+    trailing_stop = True
+    trailing_stop_positive = 0.001
+
+    timeframe = '5m'
+    informative_timeframe = '1h'
+
+    def informative_pairs(self):
+        pairs = self.dp.current_whitelist()
+        informative_pairs = [(pair, self.informative_timeframe) for pair in pairs]
+        return informative_pairs
+
+    def do_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+        dataframe['ema3'] = ta.EMA(dataframe, timeperiod=3)
+        dataframe['ema5'] = ta.EMA(dataframe, timeperiod=5)
+        dataframe['go_long'] = qtpylib.crossed_above(dataframe['ema3'], dataframe['ema5']).astype('int')
+        return dataframe
+
+    def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+
+        if self.config['runmode'].value in ('backtest', 'hyperopt'):
+            assert (timeframe_to_minutes(self.timeframe) <= 5), "Backtest this strategy in 5m or 1m timeframe."
+
+        if self.timeframe == self.informative_timeframe:
+            dataframe = self.do_indicators(dataframe, metadata)
+        else:
+            if not self.dp:
+                return dataframe
+
+            informative = self.dp.get_pair_dataframe(pair=metadata['pair'], timeframe=self.informative_timeframe)
+
+            informative = self.do_indicators(informative.copy(), metadata)
+
+            dataframe = merge_informative_pair(dataframe, informative, self.timeframe, self.informative_timeframe, ffill=True)
+            skip_columns = [(s + "_" + self.informative_timeframe) for s in ['date', 'open', 'high', 'low', 'close', 'volume']]
+            dataframe.rename(columns=lambda s: s.replace("_{}".format(self.informative_timeframe), "") if (not s in skip_columns) else s, inplace=True)
+
+        return dataframe
+
+    def populate_buy_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+        dataframe.loc[
+            qtpylib.crossed_above(dataframe['go_long'], 0)
+        ,
+        'buy'] = 1
+
+        return dataframe
+
+    def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+        return dataframe
+```
