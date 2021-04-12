@@ -1,6 +1,5 @@
 ---
 title: Backtesting Traps
-permalink: /:slug/
 layout: post
 ---
 
@@ -22,7 +21,7 @@ To start with, make sure to familiarize yourself with the [official documentatio
 
 - Slippage
 
-  Regardless of which order type you use, the market will continue to move between the time your strategy decides to place and order, and that order actually getting placed, and hopefully filled on the exchange.  Particularly when using market orders, this causes price *slippage* and it is likely that you will get a somewhat worse price than the moment the strategy decided to place an order.  How much worse will depend on the exact market conditions, spread, volume, the size of your order, price direction, etc...
+  Regardless of which order type you use, the market will continue to move between the time your strategy decides to place and order, and that order actually getting placed, and hopefully filled on the exchange.  Particularly when using market orders, this causes price slippage and it is likely that you will get a somewhat worse price than the moment the strategy decided to place an order.  How much worse will depend on the exact market conditions, spread, volume, the size of your order, price direction, etc...
 
 Refer to [Prices Used For Orders](https://www.freqtrade.io/en/stable/configuration/#prices-used-for-orders) and [Market Order Pricing](https://www.freqtrade.io/en/stable/configuration/#market-order-pricing) in the Configuration documentation for details.
 
