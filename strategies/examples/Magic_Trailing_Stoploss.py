@@ -21,4 +21,5 @@ class Magic_Trailing_Stoploss(IStrategy):
         return dataframe
 
     def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+        dataframe['sell'] = 0
         return dataframe

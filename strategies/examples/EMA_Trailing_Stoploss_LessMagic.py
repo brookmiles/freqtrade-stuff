@@ -58,4 +58,5 @@ class EMA_Trailing_Stoploss_LessMagic(IStrategy):
         return dataframe
 
     def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
+        dataframe['sell'] = 0
         return dataframe
