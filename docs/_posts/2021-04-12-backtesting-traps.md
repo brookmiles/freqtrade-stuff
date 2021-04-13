@@ -117,8 +117,9 @@ One solution you can use to ensure that you are seeing more realistic backtest r
 
 Unfortunately this will be slower than backtesting at 1h, and it complicates the code somewhat.  But if you plan on using a trailing stoploss or ROI, you probably want to know that your backtest results are not complete lies.
 
-Here is a simple strategy that uses a simple EMA crossover to generate buy signals: [EMA_Trailing_Stoploss](https://github.com/brookmiles/freqtrade-stuff/blob/main/strategies/examples/EMA_Trailing_Stoploss.py)
+Here is a simple strategy that uses a simple EMA crossover to generate buy signals: 
 
+- [EMA_Trailing_Stoploss](https://github.com/brookmiles/freqtrade-stuff/blob/main/strategies/examples/EMA_Trailing_Stoploss.py)
 
 ``` python
 from freqtrade.strategy import IStrategy
@@ -162,12 +163,14 @@ Backtesting shows a very respectable 11% profit, but this is an illusion:
 
 ![20210412-215010](https://user-images.githubusercontent.com/323682/114396964-25d72f80-9bd9-11eb-82ae-5397efc87e05.png)
 
-And the same strategy after converting it to be backtested at 5m or 1m: [EMA_Trailing_Stoploss_LessMagic](https://github.com/brookmiles/freqtrade-stuff/blob/main/strategies/examples/EMA_Trailing_Stoploss_LessMagic.py)
+And the same strategy after converting it to be backtested at 5m or 1m: 
+- [EMA_Trailing_Stoploss_LessMagic](https://github.com/brookmiles/freqtrade-stuff/blob/main/strategies/examples/EMA_Trailing_Stoploss_LessMagic.py)
 
 - change `timeframe` to 5m and add `informative_timeframe`
 - move indicators from `populate_indicators` to a new function called `do_indicators`
 - `populate_indicators` checks timeframe and run mode, and runs `do_indicators` directly when live, or runs it using the 1h informative pairs and then merges the results back into the main dataframe when backtesting.
 - put all of your signal creation in `do_indicators`, and only read buy/sell signals from `populate_buy_trend` / `populate_sell_trend`
+
 
 ``` python
 from freqtrade.strategy import IStrategy, merge_informative_pair
