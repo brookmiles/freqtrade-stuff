@@ -5,6 +5,8 @@ description: > # this means to ignore newlines until "show_excerpts:"
   Notes / thoughts / examples for Freqtrade.
   I am not an expert. I do this as a hobby. Everything here is my opinion/experience and not advice.
 
+permalink: /:categories/:year/:month/:day/:title/
+
 show_excerpts: false # set to true to show excerpts on the homepage
 
 # Minima date format
