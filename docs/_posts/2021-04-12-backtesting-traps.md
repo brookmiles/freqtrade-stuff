@@ -117,7 +117,7 @@ One solution you can use to ensure that you are seeing more realistic backtest r
 
 Unfortunately this will be slower than backtesting at 1h, and it complicates the code somewhat.  But if you plan on using a trailing stoploss or ROI, you probably want to know that your backtest results are not complete lies.
 
-Here is a simple strategy that uses a simple EMA crossover to generate buy signals: [EMA_Trailing_Stoploss](EMA_Trailing_Stoploss.py)
+Here is a simple strategy that uses a simple EMA crossover to generate buy signals: [EMA_Trailing_Stoploss](https://github.com/brookmiles/freqtrade-stuff/blob/main/strategies/examples/EMA_Trailing_Stoploss.py)
 
 
 ``` python
@@ -162,7 +162,7 @@ Backtesting shows a very respectable 11% profit, but this is an illusion:
 
 ![20210412-215010](https://user-images.githubusercontent.com/323682/114396964-25d72f80-9bd9-11eb-82ae-5397efc87e05.png)
 
-And the same strategy after converting it to be backtested at 5m or 1m: [EMA_Trailing_Stoploss_LessMagic](EMA_Trailing_Stoploss_LessMagic.py)
+And the same strategy after converting it to be backtested at 5m or 1m: [EMA_Trailing_Stoploss_LessMagic](https://github.com/brookmiles/freqtrade-stuff/blob/main/strategies/examples/EMA_Trailing_Stoploss_LessMagic.py)
 
 - change `timeframe` to 5m and add `informative_timeframe`
 - move indicators from `populate_indicators` to a new function called `do_indicators`
