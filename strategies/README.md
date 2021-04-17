@@ -43,3 +43,15 @@ If the market enters a long sideways or down period, there will be no uptrends t
 This is by design, as the expectation is that you will have fewer trade slots available than whitelisted pairs.  During bull markets there will likely be more trending pairs than you have trade slots. When a trade slot opens up, it will buy into another pair that is trending.
 
 An alternative would be to only buy into trends at the beginning of the trend, however in backtesting this has shown to be far less profitable due to the very high chance that the buy signal will be missed, because there were no available trade slots to open a new trade.  The beginning of the trend may also be missed if the pair did not have sufficient volume at the start of the trend to be active in the pairlist until after the start of the trend.
+
+### Why doesn't Ichimoku Slow use a stoploss?
+
+Since Ichimoku Slow buys into ongoing trends, hitting a stoploss would likely result in the strategy re-buying into the same trend on the next candle.
+
+### When will Ichimoku Slow sell?
+
+Ichimoku Slow will sell when the trend has come to an end as determined by the SSL Channel indicator crossing over from high to low.
+
+### Why does Ichimoku Slow sell once the price falls and not at the peak?
+
+I am not an expert, and I welcome any contributions which improve the sell criteria.
