@@ -8,7 +8,7 @@ Be sure to understand what they do and the risks involved if you decide to do so
 
 ## Ichimoku Slow
 
-My live configs are what you see [here ../](../)
+My live configs are what you see [here ../](../../../)
 
 ### What is your stake size / max trades?
 
