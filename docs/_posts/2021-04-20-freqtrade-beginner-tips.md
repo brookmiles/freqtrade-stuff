@@ -6,7 +6,7 @@ layout: post
 
 I am not an expert, and nothing that follows is financial advice.  These are my opinions based on my experience so far.
 
-# Financial Advice
+## Financial Advice
 
 Trading is risky, and trading crypto is especially risky.  Only trade what you are willing to lose.
 
@@ -18,7 +18,7 @@ Crypto trading is not for you.  You may want to look into a balanced ETF portfol
 
 Carry on.
 
-# Basics
+## Basics
 
 There are broadly 3 different areas you should become familiar with in order to trade using Freqtrade.
 
@@ -26,7 +26,7 @@ There are broadly 3 different areas you should become familiar with in order to 
 2. A baseline of technical skill, and basic programming knowledge. The ability to read and understand Python code.
 3. How to use Freqtrade specifically, its features and limitations.
 
-## General Trading
+### General Trading
 
 You should have a basic understanding of how trading works in general.  Be sure to understand the terms *market order* and *limit order* and the difference between them, *bid-ask spread*, *volume*, *slippage*, how the *order book* works, *spot* vs. *margin* trading, how a *stop-loss order* works.
 
@@ -48,7 +48,7 @@ Be sure to read not just what the indicators show directly, but about how they a
 
 - [How to Combine Trading Indicators](https://youtu.be/QdbKApfwF-g)
 
-## Programming Skills
+### Programming Skills
 
 I don't recommend using Freqtrade without at least basic understanding of programming fundamentals and the Python language.
 
@@ -62,7 +62,7 @@ At a more general level, strategies will perform differently depending on the ex
 
 If you aren't comfortable or interested in learning Python basics, then Freqtrade may not be the best fit for you.
 
-## Freqtrade Specifics
+### Freqtrade Specifics
 
 A few key points:
 
@@ -73,7 +73,7 @@ Freqtrade supports spot trading only. You cannot use it to make short trades, to
 
 Freqtrade does not support position stacking.  You cannot use Freqtrade to gradually buy more of a coin.  Once a trade is opened, it has to be sold before another trade can be made for the same coin.
 
-### Getting Started
+#### Getting Started Flow
 
 1. Install Freqtrade using the instructions on the [official website](https://www.freqtrade.io/), either using Docker, or directly on your machine.
 1. Grab the free strategies provided in the separate [freqtrade-strategies](https://github.com/freqtrade/freqtrade-strategies) github repository.  Some of the strategies collected under `user_data/strategies/berlinguyinca/` in particular are excellent starting points or references for developing your own strategies, and will often be mentioned by other Freqtrade users.
@@ -81,8 +81,9 @@ Freqtrade does not support position stacking.  You cannot use Freqtrade to gradu
 1. Refer to the [Configuration documentation](https://www.freqtrade.io/en/stable/configuration/), as it will be necessary to make changes to your configuration in order to get much of anything else done.
 1. Start backtesting strategies using the [`backtesting`](https://www.freqtrade.io/en/stable/backtesting/) command.
 1. Once you've run a backtest or two, use the [Plotting](https://www.freqtrade.io/en/stable/plotting/) functionality to visualize the results of your backtests.  This can be incredibly helpful in understanding what your strategy is actually doing.  Try out both the `plot-dataframe` and `plot-profit` commands.
+1. Try out [developing your own strategy](https://www.freqtrade.io/en/stable/strategy-customization/).
 1. Before putting real money on the line, or even setting up your exchange keys, choose a strategy to [run in *dry-run* mode](https://www.freqtrade.io/en/stable/configuration/#using-dry-run-mode), which will simulate trades in realtime using public data provided by your exchange.  
-1. Set up [Telegram](https://www.freqtrade.io/en/stable/telegram-usage/) to monitor the bot during the dry-run.
+1. Set up [Telegram](https://www.freqtrade.io/en/stable/telegram-usage/) to monitor the bot during dry-runs.
 
 Make use of the search function at the top of the [Freqtrade Offical Website](https://www.freqtrade.io/en/stable/) first, whenever you have a question about a specific command, config parameter, or topic.  If you don't find what you're looking for, you can ask for help on [Discord or Slack](https://www.freqtrade.io/en/stable/#help-discord-slack).
 
