@@ -19,7 +19,7 @@ from datetime import datetime, timedelta
 # ObeliskIM v1.1 - 2021-03-24
 #
 # by Obelisk 
-# https://twitter.com/brookmiles
+# https://github.com/brookmiles/
 #
 # I watched a youtube video on Ichimoku and then wrote this last night at 3am while I couldn't sleep.
 # Run at your own risk.

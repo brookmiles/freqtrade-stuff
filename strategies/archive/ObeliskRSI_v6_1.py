@@ -18,7 +18,7 @@ from datetime import datetime, timedelta
 # ObeliskRSI v6.1 - 2021-03-06
 #
 # by Obelisk 
-# https://twitter.com/brookmiles
+# https://github.com/brookmiles/
 #
 # Run at your own risk.
 # I don't know what I'm doing.

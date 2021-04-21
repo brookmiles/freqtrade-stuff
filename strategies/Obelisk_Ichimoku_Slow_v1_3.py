@@ -13,7 +13,7 @@ from freqtrade.exchange import timeframe_to_minutes
 # Obelisk_Ichimoku_Slow v1.3 - 2021-04-20
 #
 # by Obelisk 
-# https://twitter.com/brookmiles
+# https://github.com/brookmiles/
 #
 # 1.3 increase return without too much additional drawdown
 #  - add ema entry guards

@@ -13,7 +13,7 @@ from freqtrade.exchange import timeframe_to_minutes
 # Obelisk_Ichimoku_Slow v1.1 - 2021-04-04
 #
 # by Obelisk 
-# https://twitter.com/brookmiles
+# https://github.com/brookmiles/
 #
 # The point of this strategy is to buy and hold an up trend as long as possible.
 # If you are tempted to add ROI or trailing stops, you might be better off using Obelisk_TradePro_Ichi instead.

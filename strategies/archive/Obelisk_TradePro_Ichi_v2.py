@@ -14,7 +14,7 @@ pd.options.mode.chained_assignment = None  # default='warn'
 # Obelisk_TradePro_Ichi v2 - 2021-03-27
 #
 # by Obelisk 
-# https://twitter.com/brookmiles
+# https://github.com/brookmiles/
 #
 # Based on "Crazy Results Best Ichimoku Cloud Trading Strategy Proven 100 Trades" by Trade Pro
 # https://www.youtube.com/watch?v=8gWIykJgMNY

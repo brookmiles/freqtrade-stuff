@@ -13,7 +13,7 @@ from freqtrade.exchange import timeframe_to_minutes
 # Obelisk_Ichimoku_Slow v1.2 - 2021-04-17
 #
 # by Obelisk 
-# https://twitter.com/brookmiles
+# https://github.com/brookmiles/
 #
 # 1.2 is aimed at reducing drawdown
 #  - additional entry guard, ensure rising, but not overbought

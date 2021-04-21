@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 # Obelisk_3EMA_StochRSI_ATR - 2021-04-10
 #
 # by Obelisk 
-# https://twitter.com/brookmiles
+# https://github.com/brookmiles/
 #
 # DO NOT RUN LIVE
 #

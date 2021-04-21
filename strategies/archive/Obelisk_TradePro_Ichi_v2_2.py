@@ -13,7 +13,7 @@ from freqtrade.exchange import timeframe_to_minutes
 # Obelisk_TradePro_Ichi v2.2 - 2021-04-04
 #
 # by Obelisk 
-# https://twitter.com/brookmiles
+# https://github.com/brookmiles/
 #
 # WARNING
 #
