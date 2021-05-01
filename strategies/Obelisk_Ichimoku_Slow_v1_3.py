@@ -223,12 +223,14 @@ class Obelisk_Ichimoku_Slow_v1_3(IStrategy):
         dataframe.loc[
             (dataframe['trending'] > 0)
             & (dataframe['entry_ok'] > 0)
+            & (dataframe['date'].dt.minute == 0) # when backtesting at 5m/1m only set signal on the hour
         , 'buy'] = 1
         return dataframe
 
     def populate_sell_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe.loc[
             (dataframe['trending'] == 0)
+            & (dataframe['date'].dt.minute == 0) # when backtesting at 5m/1m only set signal on the hour
             , 'sell'] = 1
         return dataframe
 
