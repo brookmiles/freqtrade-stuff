@@ -1,5 +1,4 @@
 {
-    "timeframe": "1h",
     "dry_run": false,
     "max_open_trades": 5,
     "stake_currency": "USD",
@@ -7,7 +6,7 @@
     "tradable_balance_ratio": 0.99,
     "fiat_display_currency": "USD",
     "cancel_open_orders_on_exit": false,
-    "forcebuy_enable": true,
+    "forcebuy_enable": false,
     "unfilledtimeout": {
         "buy": 10,
         "sell": 30
@@ -54,17 +53,19 @@
         "pair_whitelist": [
         ],
         "pair_blacklist": [
+            "EUR/.*",
+            "GBP/.*",
+            "AUD/.*",
         ]
     },
     "pairlists": [
         {
             "method": "VolumePairList",
-            "number_assets": 25,
+            "number_assets": 20,
             "sort_key": "quoteVolume",
             "refresh_period": 1800
         },
         {"method": "AgeFilter", "min_days_listed": 10},
-        {"method": "PrecisionFilter"},
         {"method": "PriceFilter", "low_price_ratio": 0.001},
         {"method": "SpreadFilter", "max_spread_ratio": 0.005},
         {
@@ -75,7 +76,7 @@
         },
         {
             "method": "VolumePairList",
-            "number_assets": 20,
+            "number_assets": 15,
             "sort_key": "quoteVolume",
         },
         {"method": "PerformanceFilter"},

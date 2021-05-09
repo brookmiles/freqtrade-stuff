@@ -1,6 +1,5 @@
 {
     "dry_run": false,
-    "timeframe": "1h",
     "max_open_trades": 5,
     "stake_currency": "USD",
     "stake_amount": "unlimited",
@@ -72,21 +71,21 @@
             "refresh_period": 1800
         },
         {"method": "AgeFilter", "min_days_listed": 10},
-        {"method": "PrecisionFilter"},
+        {"method": "SpreadFilter", "max_spread_ratio": 0.005},
         {"method": "PriceFilter", "low_price_ratio": 0.001},
         {
             "method": "RangeStabilityFilter",
             "lookback_days": 3,
-            "min_rate_of_change": 0.05,
+            "min_rate_of_change": 0.1,
             "refresh_period": 1440
         },
-        {"method": "PerformanceFilter"},
         {
             "method": "VolumePairList",
-            "number_assets": 10,
+            "number_assets": 15,
             "sort_key": "quoteVolume",
             "refresh_period": 1800
         },
+        {"method": "PerformanceFilter"},
     ],
     "edge": {
         "enabled": false,
