@@ -60,6 +60,8 @@
         "pair_blacklist": [
             ".*BULL/.*",
             ".*BEAR/.*",
+            ".*BULL2021/.*",
+            ".*BEAR2021/.*"
         ]
     },
     "pairlists": [
