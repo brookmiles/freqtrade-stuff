@@ -243,7 +243,7 @@ class Obelisk_Ichimoku_ZEMA_v1(IStrategy):
                            rate: float, time_in_force: str, sell_reason: str,
                            current_time: 'datetime', **kwargs) -> bool:
 
-        if sell_reason in ('roi'):
+        if sell_reason in ('roi',):
             dataframe, _ = self.dp.get_analyzed_dataframe(pair, self.timeframe)
             current_candle = dataframe.iloc[-1]
             if current_candle is not None:
